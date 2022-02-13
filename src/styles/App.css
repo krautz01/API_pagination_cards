@@ -1,0 +1,22 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.App {
+  width: 800px;
+  justify-content: center;
+}
+
+#root {
+  display: flex; 
+  /*justify-content: center; */
+}
+
+.card {
+  display: flex;
+  padding: 15px;
+  border: 2px solid teal;
+  margin-top: 15px;
+} 
