@@ -25,8 +25,8 @@ const PhotoCard = (props) => {
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
     return (
-        <div>
-            <Card sx={{maxWidth: 345}}>
+        <div className='card'>
+            <Card sx={{maxWidth: 345}} spacing={2}>
                 <CardMedia
                     component="img"
                     height="140"

@@ -1,17 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import styles from './styles/App.css';
+import s from './styles/App.css';
 import Button from '@mui/material/Button';
 import CardList from './components/CardList';
-import MySelect from './components/MySelect';
-import MenuItem from '@mui/material/MenuItem';
-import { useTheme } from '@mui/material/styles';
-import OutlinedInput from '@mui/material/OutlinedInput';
-import InputLabel from '@mui/material/InputLabel';
-import FormControl from '@mui/material/FormControl';
-import Pagination from '@mui/material/Pagination';
 import CardService from './API/CardService';
 import Loader from './components/Loader';
 import { getPagesArray, getPagesCount } from './utils/Pages'
+import { Pagination, Stack } from '@mui/material';
 
 
 function App() {
@@ -56,7 +50,24 @@ function App() {
       <Button variant="contained" >
         Card list
       </Button>
-      {/* <div>
+      <div>
+        {/* pagesArray.map(p =>
+        <Button key={p} onClick={() => changePage(p)}>{p}</Button>
+      ) */}
+        <Pagination count={totalPages} page={page} onChange={(_, page) => { setPage(page) }} />
+      </div>
+      {isCardsLoading
+        ? <Loader />
+        : <CardList cards={cards} removeCard={removeCard} album='Album 1' />
+    
+      }
+    </div>
+  );
+};
+
+export default App;
+
+{/* <div>
         <MySelect value={selectedSort}
           onChange={sortCards}
           defaultValue='sorting' 
@@ -64,19 +75,3 @@ function App() {
             { value: 'albumId', name: 'by albumId' }
           ]} />
       </div> */}
-      <div>
-        {pagesArray.map(p =>
-          <Button key={p} onClick={() => changePage(p)}>{p}</Button>
-        )}
-      </div>
-      {isCardsLoading
-        ? <Loader />
-        : <div className={styles.card}>
-          <CardList cards={cards} removeCard={removeCard} album='Album 1' />
-        </div>
-      }
-    </div>
-  );
-};
-
-export default App;
