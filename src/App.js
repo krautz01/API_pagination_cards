@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import s from './styles/App.css';
+import './styles/App.css'
 import Button from '@mui/material/Button';
 import CardList from './components/CardList';
 import CardService from './API/CardService';
 import Loader from './components/Loader';
 import { getPagesArray, getPagesCount } from './utils/Pages'
-import { Pagination, Stack } from '@mui/material';
+import { Pagination } from '@mui/material';
+import Typography from '@mui/material/Typography';
 
 
 function App() {
@@ -13,8 +14,9 @@ function App() {
   const [selectedSort, setSelectedSort] = useState('');
   const [isCardsLoading, setIsCardsLoading] = useState(false);
   const [totalPages, setTotalPages] = useState(0)
-  const [limit, setLimit] = useState(100)
+  const [limit, setLimit] = useState(10)
   const [page, setPage] = useState(1)
+  const [isList, setIsList] = useState(false)
 
   let pagesArray = getPagesArray(totalPages)
 
@@ -24,12 +26,6 @@ function App() {
 
   const removeCard = (card) => {
     setCards(cards.filter(p => p.id !== card.id))
-  }
-
-  const sortCards = (sort) => {
-    console.log(sort)
-    setSelectedSort(sort)
-    setCards([...cards].sort((a, b) => a[sort].localCompare(b[sort])))
   }
 
   const changePage = (page) => {
@@ -45,33 +41,30 @@ function App() {
     setTotalPages(getPagesCount(totalCount, limit))
   }
 
+  const getCardList = () => {
+    return (
+      <div>
+        <div>
+          <Pagination style={{ marginTop: 5 }} count={totalPages} page={page} onChange={(_, page) => { setPage(page) }} />
+        </div>
+        {isCardsLoading
+          ? <Loader />
+          : <CardList cards={cards} removeCard={removeCard} album='Album 1' />
+        }
+      </div>
+    )
+  }
+
   return (
     <div className="App">
-      <Button variant="contained" >
-        Card list
+      <Button variant="contained" style={{ marginTop: 5 }} onClick={(isList) => setIsList(true)}>
+        GET CARDLIST
       </Button>
-      <div>
-        {/* pagesArray.map(p =>
-        <Button key={p} onClick={() => changePage(p)}>{p}</Button>
-      ) */}
-        <Pagination count={totalPages} page={page} onChange={(_, page) => { setPage(page) }} />
-      </div>
-      {isCardsLoading
-        ? <Loader />
-        : <CardList cards={cards} removeCard={removeCard} album='Album 1' />
-    
-      }
+      {isList
+        ? getCardList()
+        : <Typography>Click on button !</Typography>}
     </div>
   );
 };
 
 export default App;
-
-{/* <div>
-        <MySelect value={selectedSort}
-          onChange={sortCards}
-          defaultValue='sorting' 
-          options={[
-            { value: 'albumId', name: 'by albumId' }
-          ]} />
-      </div> */}

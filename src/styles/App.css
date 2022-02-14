@@ -4,23 +4,21 @@
   box-sizing: border-box;
 }
 
+.App {
+  width: 1000px;
+}
+
 .cardFlex {
-  display: flex;
-  flex-direction: column;
-  /* grid-template-columns: 1fr 1fr 1fr;
-  grid-template-rows: 35px; */
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
 }
 
 .card {
-  
+  padding: 5px;
 }
 
 #root {
   display: flex;
   flex-direction: column;
   align-items: center;
-}
-
-.App {
-  width: 800px;
 }
