@@ -5,18 +5,38 @@
 }
 
 .App {
-  width: 800px;
+  width: 100%;
   justify-content: center;
 }
 
 #root {
   display: flex; 
-  /*justify-content: center; */
+  justify-content: center;
 }
 
 .card {
-  display: flex;
-  padding: 15px;
-  border: 2px solid teal;
-  margin-top: 15px;
+  display: grid;
+  width: 100px;
+  /* padding: 15px;
+  margin-top: 15px; */
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 65px ;
 } 
+
+.app-wrapper {
+  margin: 0 auto;
+  display: inline-grid;
+  justify-content: center;
+  grid-template-columns: 1.15fr 5fr;
+  grid-template-rows: 65px ;
+  grid-template-areas: 
+  "h h" 
+  "n c";
+  grid-gap: 10px;
+}
+
+.app-content-wrapper {
+  background: url(https://s1.1zoom.ru/big3/825/Canada_Lake_Mountains_502039.jpg) no-repeat;
+  height: 1000px;
+  grid-area: c;
+}
